@@ -5,6 +5,8 @@ const repo = require('../Repository/borrow_repository');
 router.post('/borrow', async (req, res) => {
     console.log(`borrow book ${JSON.stringify(req.body)}`);
     try{
+        if(req.body.quantity <= 0) throw new Error('Borrowed quantity has to be > 0');
+
         await repo.borrowBook(req.body.isbn, req.body.email, req.body.quantity, req.body.dueDate);
         res.status(200);
         res.send('Borrowed');

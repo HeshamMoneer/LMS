@@ -124,7 +124,7 @@ paths:
         '500':
           description: Internal server error
 
-  /search/ISBN/{key}:
+  /book/search/ISBN/{key}:
     get:
       summary: Search existing books by ISBN
       tags:
@@ -142,7 +142,7 @@ paths:
         '500':
           description: Internal server error
 
-  /search/Author/{key}:
+  /book/search/Author/{key}:
     get:
       summary: Search existing books by Author
       tags:
@@ -160,7 +160,7 @@ paths:
         '500':
           description: Internal server error
 
-  /search/Title/{key}:
+  /book/search/Title/{key}:
     get:
       summary: Search existing books by Title
       tags:

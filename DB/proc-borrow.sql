@@ -74,9 +74,7 @@ BEGIN
     DECLARE @Quantity INT;
     SET @Quantity = (SELECT Quantity FROM Borrow WHERE ISBN = @ISBN AND Email = @Email);
 
-    UPDATE Borrow 
-    SET Quantity = 0,
-        Return_Date = GETDATE()
+    DELETE FROM Borrow 
     WHERE Email = @Email AND ISBN = @ISBN;
 
     UPDATE Book
@@ -110,9 +108,9 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    SELECT * FROM Borrow
+    SELECT Borrow.* FROM Borrow
     JOIN Borrower ON Borrow.Email = Borrower.Email
     JOIN Book ON Borrow.ISBN = Book.ISBN
-    WHERE Borrow.Due_Date < GETDATE() AND Borrow.Return_Date = NULL
+    WHERE Borrow.Due_Date < GETDATE()
 END;
 GO

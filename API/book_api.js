@@ -64,7 +64,7 @@ router.delete('/:isbn', async (req, res) => {
 router.get('/search/ISBN/:key', async (req, res) => {
     console.log(`search books by ISBN with search key ${req.params.key}`);
     try {
-        const data = repo.searchBooks('ISBN', req.params.key);
+        const data = await repo.searchBooks('ISBN', req.params.key);
         res.send(data.recordset);
     } catch(err) {
         res.status(500);
@@ -75,7 +75,7 @@ router.get('/search/ISBN/:key', async (req, res) => {
 router.get('/search/Author/:key', async (req, res) => {
     console.log(`search books by Author with search key ${req.params.key}`);
     try {
-        const data = repo.searchBooks('Author', req.params.key);
+        const data = await repo.searchBooks('Author', req.params.key);
         res.send(data.recordset);
     } catch(err) {
         res.status(500);
@@ -86,7 +86,7 @@ router.get('/search/Author/:key', async (req, res) => {
 router.get('/search/Title/:key', async (req, res) => {
     console.log(`search books by Title with search key ${req.params.key}`);
     try {
-        const data = repo.searchBooks('Title', req.params.key);
+        const data = await repo.searchBooks('Title', req.params.key);
         res.send(data.recordset);
     } catch(err) {
         res.status(500);
