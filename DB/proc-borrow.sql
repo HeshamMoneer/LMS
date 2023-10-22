@@ -25,8 +25,18 @@ BEGIN
         RETURN;
     END;
 
-    INSERT INTO Borrow (ISBN, Email, Quantity, Due_Date)
-    VALUES (@ISBN, @Email, @Quantity, ISNULL(@Due_Date, DATEADD(DAY, 14, GETDATE())));
+    IF EXISTS (SELECT 1 FROM Borrow WHERE Email = @Email AND ISBN = @ISBN)
+    BEGIN
+        UPDATE Borrow
+        SET Quantity = Quantity + @Quantity,
+            Due_Date = ISNULL(@Due_Date, Due_Date)
+        WHERE Email = @Email AND ISBN = @ISBN
+    END;
+    ELSE
+    BEGIN
+        INSERT INTO Borrow (ISBN, Email, Quantity, Due_Date)
+        VALUES (@ISBN, @Email, @Quantity, ISNULL(@Due_Date, DATEADD(DAY, 14, GETDATE())));
+    END;
 
     UPDATE Book
     SET Quantity = Quantity - @Quantity
