@@ -93,3 +93,16 @@ BEGIN
     WHERE Email = @Email;
 END;
 GO
+
+
+CREATE OR ALTER PROCEDURE GetOverdueBorrows
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT * FROM Borrow
+    JOIN Borrower ON Borrow.Email = Borrower.Email
+    JOIN Book ON Borrow.ISBN = Book.ISBN
+    WHERE Borrow.Due_Date < GETDATE() AND Borrow.Return_Date = NULL
+END;
+GO
