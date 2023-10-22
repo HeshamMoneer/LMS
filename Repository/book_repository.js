@@ -3,7 +3,7 @@ const config = {
   user: process.env.SA_USER,
   password: process.env.SA_PASSWORD,
   database: process.env.DB_NAME,
-  server: 'localhost',
+  server: process.env.DB_HOST,
   options: {
     trustServerCertificate: true
   }
