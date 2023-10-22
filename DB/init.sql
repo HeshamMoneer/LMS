@@ -26,7 +26,7 @@ CREATE TABLE Borrower (
 );
 GO
 
-CREATE TABLE BORROW (
+CREATE TABLE Borrow (
   ISBN VARCHAR(13),
   Email VARCHAR(50),
   Quantity INT,

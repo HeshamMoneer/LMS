@@ -1,7 +1,6 @@
 FROM mcr.microsoft.com/mssql/server
 WORKDIR /usr/src/app
-COPY ./init.sql .
-COPY ./entrypoint.sh .
+COPY . .
 
 ENV SA_PASSWORD "y5#kA!Lm45]Uj*<"
 ENV ACCEPT_EULA Y
