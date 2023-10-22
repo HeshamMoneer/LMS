@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const repo = require('../Repository/borrower_repository');
+const validateEmail = require('./utils').validateEmail;
 
 router.get('/all', async (_, res) => {
     console.log('get all borrowers');
@@ -16,7 +17,8 @@ router.get('/all', async (_, res) => {
 router.post('/', async (req, res) => {
     console.log(`register new borrower ${JSON.stringify(req.body)}`);
     try{
-        await repo.createBorrower(req.body.email, req.body.name);
+        const email = validateEmail(req.body.email);
+        await repo.createBorrower(email, req.body.name);
         res.sendStatus(201);
     } catch(err){
         res.status(500);
