@@ -10,6 +10,95 @@ tags:
   
 paths:
 
+## Borrow API ##
+  /borrow/borrow/:
+    post:
+      summary: Borrow a book
+      tags:
+        - Borrow
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                isbn:
+                  type: string
+                email:
+                  type: string
+                quantity:
+                  type: integer
+                dueDate:
+                  type: date
+              example:
+                isbn: '9783161484100'
+                email: n@n.com
+                quantity: 1
+                dueDate: 2024-01-01
+      responses:
+        '200':
+          description: Successful response
+        '500':
+          description: Internal server error
+
+  
+  /borrow/return/:
+    post:
+      summary: Return a borrowed book
+      tags:
+        - Borrow
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                isbn:
+                  type: string
+                email:
+                  type: string
+              example:
+                isbn: '9783161484100'
+                email: n@n.com
+      responses:
+        '200':
+          description: Successful response
+        '500':
+          description: Internal server error
+
+  
+  /borrow/mybooks/{email}:
+    get:
+      summary: Get all borrowed books of a borrower
+      tags:
+        - Borrow
+      parameters:
+        - in: path
+          name: email
+          required: true
+          schema:
+            type: string
+          description: Borrower email
+      responses:
+        '200':
+          description: Successful response
+        '500':
+          description: Internal server error
+
+
+  /borrow/overdue/:
+    get:
+      summary: Get all overdue borrows
+      tags:
+        - Borrow
+      responses:
+        '200':
+          description: Successful response
+        '500':
+          description: Internal server error
+
 ## Borrower API ##
   /borrower/:
     post:
