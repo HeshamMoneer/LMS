@@ -90,37 +90,37 @@ END
 GO
 
 CREATE OR ALTER PROCEDURE SearchBookTitle
-    @Title VARCHAR(255)
+    @Key VARCHAR(255)
 AS
 BEGIN
     SET NOCOUNT ON;
 
     SELECT *
     FROM Book
-    WHERE Title LIKE @Title + '%';
+    WHERE Title LIKE @Key + '%';
 END
 GO
 
 CREATE OR ALTER PROCEDURE SearchBookAuthor
-    @Author VARCHAR(255)
+    @Key VARCHAR(255)
 AS
 BEGIN
     SET NOCOUNT ON;
 
     SELECT *
     FROM Book
-    WHERE Author LIKE @Author + '%';
+    WHERE Author LIKE @Key + '%';
 END
 GO
 
 CREATE OR ALTER PROCEDURE SearchBookISBN
-    @ISBN VARCHAR(255)
+    @Key VARCHAR(255)
 AS
 BEGIN
     SET NOCOUNT ON;
 
     SELECT *
     FROM Book
-    WHERE ISBN LIKE @ISBN + '%';
+    WHERE ISBN LIKE @Key + '%';
 END
 GO

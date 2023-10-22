@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/HeshamMoneer/LMS/issues"
   },
-  "homepage": "https://github.com/HeshamMoneer/LMS#readme"
+  "homepage": "https://github.com/HeshamMoneer/LMS#readme",
+  "dependencies": {
+    "mssql": "^10.0.1"
+  }
 }
