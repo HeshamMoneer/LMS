@@ -1,0 +1,10 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Library Management System
+  description: Library Management System API
+tags:
+  - name: Book
+  - name: Borrow
+  - name: Borrower
+  
