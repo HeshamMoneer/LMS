@@ -8,3 +8,101 @@ tags:
   - name: Borrow
   - name: Borrower
   
+paths:
+
+## Borrower API ##
+  /borrower/:
+    post:
+      summary: Register a new borrower
+      tags:
+        - Borrower
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                name:
+                  type: string
+              example:
+                email: n@n.com
+                name: John Doe
+      responses:
+        '201':
+          description: Created successfully
+        '500':
+          description: Internal server error
+
+    patch:
+      summary: Update an existing borrower
+      tags:
+        - Borrower
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                name:
+                  type: string
+              example:
+                email: n@n.com
+                name: John Doe
+      responses:
+        '200':
+          description: Updated successfully
+        '500':
+          description: Internal server error
+
+  /borrower/{email}:
+    get:
+      summary: Get Borrower info
+      tags:
+        - Borrower
+      parameters:
+        - in: path
+          name: email
+          required: true
+          schema:
+            type: string
+          description: Borrower email
+      responses:
+        '200':
+          description: Successful response
+        '500':
+          description: Internal server error
+
+    delete:
+      summary: Delete borrower
+      tags:
+        - Borrower
+      parameters:
+        - in: path
+          name: email
+          required: true
+          schema:
+            type: string
+          description: Borrower email
+      responses:
+        '200':
+          description: Deleted successfully
+        '500':
+          description: Internal server error
+
+  /borrower/all:
+    get:
+      summary: Get all borrowers
+      tags:
+        - Borrower
+      responses:
+        '200':
+          description: Successful response
+        '500':
+          description: Internal server error
+
