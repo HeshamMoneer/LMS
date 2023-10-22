@@ -17,6 +17,10 @@
   },
   "homepage": "https://github.com/HeshamMoneer/LMS#readme",
   "dependencies": {
-    "mssql": "^10.0.1"
+    "express": "^4.18.2",
+    "mssql": "^10.0.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0",
+    "yamljs": "^0.3.0"
   }
 }
