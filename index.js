@@ -1,9 +1,11 @@
 const express = require('express');
 const swaggerUi = require('swagger-ui-express');
 const yml = require('yamljs');
+const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.BACKEND_PORT;
 
+app.use(bodyParser.json());
 
 const swaggerYML = yml.load('./swagger.yml');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerYML));
