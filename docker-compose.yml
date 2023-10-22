@@ -1,0 +1,17 @@
+version: '3'
+services:
+  backend:
+    build: .
+    ports:
+      - ${BACKEND_PORT}:${BACKEND_PORT}
+    depends_on:
+      - db
+    env_file:
+      - .env
+
+  db:
+    build: ./DB
+    ports:
+      - 1433:1433
+    env_file:
+      - .env
