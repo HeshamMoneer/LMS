@@ -36,6 +36,7 @@ CREATE TABLE Borrow (
   PRIMARY KEY (ISBN, Email),
   FOREIGN KEY (ISBN) REFERENCES Book(ISBN),
   FOREIGN KEY (Email) REFERENCES Borrower(Email),
-  CONSTRAINT CK_Borrow_Quantity CHECK (Quantity > 0)
+  CONSTRAINT CK_Borrow_Quantity CHECK (Quantity > 0),
+  CONSTRAINT CK_Borrow_Dates CHECK (Due_Date >= Borrow_Date AND Return_Date >= Borrow_Date)
 );
 GO
