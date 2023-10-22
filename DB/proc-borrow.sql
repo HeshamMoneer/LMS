@@ -9,19 +9,19 @@ BEGIN
 
     IF NOT EXISTS (SELECT 1 FROM Book WHERE ISBN = @ISBN)
     BEGIN
-        RAISERROR(9, -1, -1, 'Book not found')
+        RAISERROR('Book not found', 16, 1)
         RETURN;
     END;
 
     IF NOT EXISTS (SELECT 1 FROM Borrower WHERE Email = @Email)
     BEGIN
-        RAISERROR(10, -1, -1, 'Borrower not found')
+        RAISERROR('Borrower not found', 16, 1)
         RETURN;
     END;
 
     IF (SELECT Quantity FROM Book WHERE ISBN = @ISBN) < @Quantity
     BEGIN
-        RAISERROR(11, -1, -1, 'Not enough copies')
+        RAISERROR('Not enough copies', 16, 1)
         RETURN;
     END;
 
@@ -45,19 +45,19 @@ BEGIN
 
     IF NOT EXISTS (SELECT 1 FROM Book WHERE ISBN = @ISBN)
     BEGIN
-        RAISERROR(12, -1, -1, 'Book not found')
+        RAISERROR('Book not found', 16, 1)
         RETURN;
     END;
 
     IF NOT EXISTS (SELECT 1 FROM Borrower WHERE Email = @Email)
     BEGIN
-        RAISERROR(13, -1, -1, 'Borrower not found')
+        RAISERROR('Borrower not found', 16, 1)
         RETURN;
     END;
 
     IF NOT EXISTS (SELECT 1 FROM Borrow WHERE ISBN = @ISBN AND Email = @Email)
     BEGIN
-        RAISERROR(14, -1, -1, 'User did not borrow this book')
+        RAISERROR('User did not borrow this book', 16, 1)
         RETURN;
     END;
 
@@ -85,7 +85,7 @@ BEGIN
 
     IF NOT EXISTS (SELECT 1 FROM Borrower WHERE Email = @Email)
     BEGIN
-        RAISERROR(15, -1, -1, 'Borrower not found')
+        RAISERROR('Borrower not found', 16, 1)
         RETURN;
     END;
 

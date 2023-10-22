@@ -7,7 +7,7 @@ BEGIN
 
     IF EXISTS (SELECT 1 FROM Borrower WHERE Email = @Email)
     BEGIN
-        RAISERROR(1, -1, -1, 'Borrower already exists')
+        RAISERROR('Borrower already exists', 16, 1)
         RETURN;
     END;
 
@@ -24,7 +24,7 @@ BEGIN
 
     IF NOT EXISTS (SELECT 1 FROM Borrower WHERE Email = @Email)
     BEGIN
-        RAISERROR(2, -1, -1, 'Borrower not found')
+        RAISERROR('Borrower not found', 16, 1)
         RETURN;
     END;
 
@@ -42,7 +42,7 @@ BEGIN
 
     IF NOT EXISTS (SELECT 1 FROM Borrower WHERE Email = @Email)
     BEGIN
-        RAISERROR(3, -1, -1, 'Borrower not found')
+        RAISERROR('Borrower not found', 16, 1)
         RETURN;
     END;
 
@@ -62,7 +62,7 @@ BEGIN
 
     IF NOT EXISTS (SELECT 1 FROM Borrower WHERE Email = @Email)
     BEGIN
-        RAISERROR(4, -1, -1, 'Borrower not found')
+        RAISERROR('Borrower not found', 16, 1)
         RETURN;
     END;
 

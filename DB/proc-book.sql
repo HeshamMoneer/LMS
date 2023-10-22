@@ -10,7 +10,7 @@ BEGIN
 
     IF EXISTS (SELECT 1 FROM Book WHERE ISBN = @ISBN)
     BEGIN
-        RAISERROR(5, -1, -1, 'Book already exists')
+        RAISERROR('Book already exists', 16, 1)
         RETURN;
     END;
 
@@ -27,7 +27,7 @@ BEGIN
 
     IF NOT EXISTS (SELECT 1 FROM Book WHERE ISBN = @ISBN)
     BEGIN
-        RAISERROR(6, -1, -1, 'Book not found')
+        RAISERROR('Book not found', 16, 1)
         RETURN;
     END;
 
@@ -49,7 +49,7 @@ BEGIN
 
     IF NOT EXISTS (SELECT 1 FROM Book WHERE ISBN = @ISBN)
     BEGIN
-        RAISERROR(7, -1, -1, 'Book not found')
+        RAISERROR('Book not found', 16, 1)
         RETURN;
     END;
 
@@ -71,7 +71,7 @@ BEGIN
 
     IF NOT EXISTS (SELECT 1 FROM Book WHERE ISBN = @ISBN)
     BEGIN
-        RAISERROR(8, -1, -1, 'Book not found')
+        RAISERROR('Book not found', 16, 1)
         RETURN;
     END;
 
