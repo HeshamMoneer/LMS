@@ -10,6 +10,175 @@ tags:
   
 paths:
 
+## Book API ##
+  /book/all:
+    get:
+      summary: Get all books
+      tags:
+        - Book
+      responses:
+        '200':
+          description: Successful response
+        '500':
+          description: Internal server error
+
+  /book/:
+    post:
+      summary: Add a new book
+      tags:
+        - Book
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                isbn:
+                  type: string
+                title:
+                  type: string
+                author:
+                  type: string
+                quantity:
+                  type: integer
+                shelfNumber:
+                  type: integer
+              example:
+                isbn: '9783161484100'
+                title: Book title
+                author: Book author
+                quantity: 1
+                shelfNumber: 0
+      responses:
+        '201':
+          description: Created successfully
+        '500':
+          description: Internal server error
+
+    patch:
+      summary: Update an existing book
+      tags:
+        - Book
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                isbn:
+                  type: string
+                title:
+                  type: string
+                author:
+                  type: string
+                quantity:
+                  type: integer
+                shelfNumber:
+                  type: integer
+              example:
+                isbn: '9783161484100'
+                title: Book title
+                author: Book author
+                quantity: 1
+                shelfNumber: 0
+      responses:
+        '200':
+          description: Updated successfully
+        '500':
+          description: Internal server error
+
+  /book/{isbn}:
+    get:
+      summary: Get Book info
+      tags:
+        - Book
+      parameters:
+        - in: path
+          name: isbn
+          required: true
+          schema:
+            type: string
+          description: Book ISBN
+      responses:
+        '200':
+          description: Successful response
+        '500':
+          description: Internal server error
+
+    delete:
+      summary: Delete a book
+      tags:
+        - Book
+      parameters:
+        - in: path
+          name: isbn
+          required: true
+          schema:
+            type: string
+          description: Book ISBN
+      responses:
+        '200':
+          description: Deleted successfully
+        '500':
+          description: Internal server error
+
+  /search/ISBN/{key}:
+    get:
+      summary: Search existing books by ISBN
+      tags:
+        - Book
+      parameters:
+        - in: path
+          name: key
+          required: true
+          schema:
+            type: string
+          description: Search key
+      responses:
+        '200':
+          description: Successful response
+        '500':
+          description: Internal server error
+
+  /search/Author/{key}:
+    get:
+      summary: Search existing books by Author
+      tags:
+        - Book
+      parameters:
+        - in: path
+          name: key
+          required: true
+          schema:
+            type: string
+          description: Search key
+      responses:
+        '200':
+          description: Successful response
+        '500':
+          description: Internal server error
+
+  /search/Title/{key}:
+    get:
+      summary: Search existing books by Title
+      tags:
+        - Book
+      parameters:
+        - in: path
+          name: key
+          required: true
+          schema:
+            type: string
+          description: Search key
+      responses:
+        '200':
+          description: Successful response
+        '500':
+          description: Internal server error
+
+
 ## Borrow API ##
   /borrow/borrow/:
     post:
