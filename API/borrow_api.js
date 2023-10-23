@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const repo = require('../Repository/borrow_repository');
+const utils = require('./utils');
 
 router.post('/borrow', async (req, res) => {
     console.log(`borrow book ${JSON.stringify(req.body)}`);
@@ -12,7 +13,7 @@ router.post('/borrow', async (req, res) => {
         res.send('Borrowed');
     } catch(err){
         res.status(500);
-        res.send(err.message);
+        res.send(utils.refineError(err.message));
     }
 });
 
@@ -24,7 +25,7 @@ router.post('/return', async (req, res) => {
         res.send('Returned');
     } catch(err){
         res.status(500);
-        res.send(err.message);
+        res.send(utils.refineError(err.message));
     }
 });
 
@@ -35,7 +36,7 @@ router.get('/mybooks/:email', async (req, res) => {
         res.send(data.recordset);
     } catch(err){
         res.status(500);
-        res.send(err.message);
+        res.send(utils.refineError(err.message));
     }
 });
 
@@ -46,7 +47,7 @@ router.get('/overdue', async (_, res) => {
         res.send(data.recordset);
     } catch(err){
         res.status(500);
-        res.send(err.message);
+        res.send(utils.refineError(err.message));
     }
 });
 

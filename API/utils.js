@@ -21,4 +21,30 @@ function validateISBN(isbn){
     }
 }
 
-module.exports = {validateEmail, validateISBN};
+function isString(msg){
+    return (typeof msg === 'string' || msg instanceof String);
+}
+
+function refineError(msg){
+    if(isString(msg) && msg.includes('CHECK constraint')){
+        if(msg.includes('CK_Book_Quantity')){
+            return `Quantity should be >= 0`;
+        } else if(msg.includes('CK_Borrow_Quantity')){
+            return `Quantity should be > 0`;
+        } else if(msg.includes('CK_Borrow_Dates')){
+            return `Due date should be >= borrow date`
+        }
+    }
+    if(isString(msg) && msg.includes('Cannot insert the value NULL into column')){
+        const column = msg.split(',')[0].split("'")[1].replace("'", '');
+        return `Column ${column} cannot be null`;
+    }
+    if(isString(msg) && msg.includes('Violation of UNIQUE KEY constraint')){
+        const val = msg.split('(')[1].replace(')', '').replace('.', '');
+        return `Value ${val} is duplicated`;
+    }
+
+    return msg;
+}
+
+module.exports = {validateEmail, validateISBN, refineError};

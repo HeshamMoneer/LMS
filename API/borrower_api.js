@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const repo = require('../Repository/borrower_repository');
-const validateEmail = require('./utils').validateEmail;
+const utils = require('./utils');
 
 router.get('/all', async (_, res) => {
     console.log('get all borrowers');
@@ -10,19 +10,19 @@ router.get('/all', async (_, res) => {
         res.send(data.recordset);
     } catch(err) {
         res.status(500);
-        res.send(err.message);
+        res.send(utils.refineError(err.message));
     }
 });
 
 router.post('/', async (req, res) => {
     console.log(`register new borrower ${JSON.stringify(req.body)}`);
     try{
-        const email = validateEmail(req.body.email);
+        const email = utils.validateEmail(req.body.email);
         await repo.createBorrower(email, req.body.name);
         res.sendStatus(201);
     } catch(err){
         res.status(500);
-        res.send(err.message);
+        res.send(utils.refineError(err.message));
     }
 });
 
@@ -33,7 +33,7 @@ router.get('/:email', async (req, res) => {
         res.send(data.recordset[0]);
     } catch(err){
         res.status(500);
-        res.send(err.message);
+        res.send(utils.refineError(err.message));
     }
 });
 
@@ -45,7 +45,7 @@ router.patch('/', async (req, res) => {
         res.send('Updated');
     } catch(err){
         res.status(500);
-        res.send(err.message);
+        res.send(utils.refineError(err.message));
     }
 });
 
@@ -57,7 +57,7 @@ router.delete('/:email', async (req, res) => {
         res.send('Deleted');
     } catch(err){
         res.status(500);
-        res.send(err.message);
+        res.send(utils.refineError(err.message));
     }
 });
 

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const repo = require('../Repository/book_repository');
-const validateISBN = require('./utils').validateISBN;
+const utils = require('./utils');
 
 router.get('/all', async (_, res) => {
     console.log('get all books');
@@ -10,19 +10,19 @@ router.get('/all', async (_, res) => {
         res.send(data.recordset);
     } catch(err) {
         res.status(500);
-        res.send(err.message);
+        res.send(utils.refineError(err.message));
     }
 });
 
 router.post('/', async (req, res) => {
     console.log(`add new book ${JSON.stringify(req.body)}`);
     try {
-        const isbn = validateISBN(req.body.isbn);
+        const isbn = utils.validateISBN(req.body.isbn);
         await repo.createBook(isbn, req.body.title, req.body.author, req.body.quantity, req.body.shelfNumber);
         res.sendStatus(201);
     } catch(err) {
         res.status(500);
-        res.send(err.message);
+        res.send(utils.refineError(err.message));
     }
 });
 
@@ -33,7 +33,7 @@ router.get('/:isbn', async (req, res) => {
         res.send(data.recordset);
     } catch(err) {
         res.status(500);
-        res.send(err.message);
+        res.send(utils.refineError(err.message));
     }
 });
 
@@ -45,7 +45,7 @@ router.patch('/', async (req, res) => {
         res.send('Updated');
     } catch(err) {
         res.status(500);
-        res.send(err.message);
+        res.send(utils.refineError(err.message));
     }
 });
 
@@ -57,7 +57,7 @@ router.delete('/:isbn', async (req, res) => {
         res.send('Deleted');
     } catch(err) {
         res.status(500);
-        res.send(err.message);
+        res.send(utils.refineError(err.message));
     }
 });
 
@@ -68,7 +68,7 @@ router.get('/search/ISBN/:key', async (req, res) => {
         res.send(data.recordset);
     } catch(err) {
         res.status(500);
-        res.send(err.message);
+        res.send(utils.refineError(err.message));
     }
 });
 
@@ -79,7 +79,7 @@ router.get('/search/Author/:key', async (req, res) => {
         res.send(data.recordset);
     } catch(err) {
         res.status(500);
-        res.send(err.message);
+        res.send(utils.refineError(err.message));
     }
 });
 
@@ -90,7 +90,7 @@ router.get('/search/Title/:key', async (req, res) => {
         res.send(data.recordset);
     } catch(err) {
         res.status(500);
-        res.send(err.message);
+        res.send(utils.refineError(err.message));
     }
 });
 
